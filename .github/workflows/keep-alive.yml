@@ -11,16 +11,13 @@ jobs:
 
     steps:
       - name: Ping Supabase
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
           echo "Verificando conexión con Supabase..."
 
           STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
-            "${SUPABASE_URL}/rest/v1/inscripciones?select=nombre&limit=1" \
-            -H "apikey: ${SUPABASE_ANON_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
+            "https://sacnwhuuuogjvgvxqdky.supabase.co/rest/v1/inscripciones?select=nombre&limit=1" \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhY253aHV1dW9nanZndnhxZGt5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEwNDk3MTQsImV4cCI6MjA4NjYyNTcxNH0.WXDG1Rqkdk5ZOYd8K7AViA20zlCnqbOopq401eQ4a_Q" \
+            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhY253aHV1dW9nanZndnhxZGt5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEwNDk3MTQsImV4cCI6MjA4NjYyNTcxNH0.WXDG1Rqkdk5ZOYd8K7AViA20zlCnqbOopq401eQ4a_Q")
 
           echo "Código de estado: $STATUS_CODE"
 
